@@ -11,7 +11,6 @@ def calc(number1: float,
     elif oper_sign == '/':
         return number1 / number2
 
-
 while True:
     num1 = input('\n > введите первое число: ')
     if not num1:
