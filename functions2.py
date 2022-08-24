@@ -6,12 +6,12 @@ print_align(text='test')
 print_align(text='test', right=True)
 
 # приведёт к исключению в коде функции из-за того, что аргументы запишутся в не предназначенные для них параметры
-# print_align(True, 'test')
+print_align(True, 'test')
 # корректная передача аргументов
 print_align(right=True, text='test')
 
 # приведёт к исключению во время вызова функции
-# print_align(right=True, 'test')
+print_align(right=True, 'test')
 # корректная передача аргументов
 print_align('test', right=True)
 
