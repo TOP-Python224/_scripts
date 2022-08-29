@@ -13,7 +13,7 @@ def mymap(function: Callable, iterator: Iterable):
 def zbc(obj):
     return len(str(obj))
 
-data_test = [rr(100,) for _ in range(10)]
+data_test = [rr(100, 2000, 100) for _ in range(10)]
 ret_test = mymap(zbc, data_test)
 map_test = map(zbc, data_test)
 
