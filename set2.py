@@ -7,6 +7,7 @@ print('\n')
 
 unique_chars = set(text)
 
+# проверка на принадлежность множеству
 while True:
     char = input(' > ')
     if not char:
@@ -15,5 +16,3 @@ while True:
         print(f"'{char}' находится в множестве")
     else:
         print(f"'{char}' отсутствует в множестве")
-
-q = {list(text)}
