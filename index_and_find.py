@@ -22,3 +22,16 @@ for word in words:
 
 else:
     print('\n _ не найдено! =( ')
+
+
+text = 'information school graduate seeks graduate school information'
+
+i = text.find('school')
+
+j = text.find('school', 30)
+j = text[30:].find('school')
+
+k = text.find('school', 20, 40)
+k = text[20:40].find('school')
+
+print(i, j, k)
