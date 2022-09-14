@@ -26,27 +26,28 @@ for name, obj in globals().copy().items():
 pprint.pprint(funcs)
 print('\n')
 
+
 # вызываем функции из словаря
-# for func in funcs.values():
-    # try:
+for func in funcs.values():
+    try:
         # сначала без аргументов
-        # func()
-    # except TypeError as e:
+        func()
+    except TypeError as e:
         # смотрим текст исключения
-        # for ch in str(e):
-            # if ch.isdecimal():
+        for ch in str(e):
+            if ch.isdecimal():
                 # берём из текста количество обязательных аргументов
-                # req_args = int(ch)
-                # break
-        # else:
-            # req_args = 0
+                req_args = int(ch)
+                break
+        else:
+            req_args = 0
         # запрашиваем обязательные аргументы у пользователя
-        # args = []
-        # for i in range(req_args):
-            # prompt = f' _ аргумент {i+1} для функции {func.__name__}: '
-            # args += [int(input(prompt))]
+        args = []
+        for i in range(req_args):
+            prompt = f' _ аргумент {i+1} для функции {func.__name__}: '
+            args += [int(input(prompt))]
         # повторно вызываем функцию
-        # print(func(*args))
+        print(func(*args))
 
 
 # вызываем функции из словаря
