@@ -43,3 +43,18 @@ def count_children(families_data: dict) -> dict:
 
 
 print(count_children(families))
+
+
+
+def dict_referencing(data: dict) -> dict:
+    return data
+
+new_dict = dict_referencing(families)
+print(f'\n{new_dict is families = }\n')
+
+
+def global_dict_change(data: dict) -> None:
+    data['new_super_unique_key'] = hash('new_super_unique_key')
+
+global_dict_change(families)
+pprint(families)
