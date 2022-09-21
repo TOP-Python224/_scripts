@@ -1,11 +1,13 @@
 """Третий модуль программы демонстратора работы с модулями."""
 print('начало выполнения модуля 3')
 
-import module2
+from module2 import M1_VAR, M2_VAR
+
+from pprint import pprint
+
 
 M3_VAR = 300
 
-if __name__ == '__main__':
-    print(f'{__name__} — главный модуль')
+print(M1_VAR + M2_VAR + M3_VAR)
 
 print('конец выполнения модуля 3')
