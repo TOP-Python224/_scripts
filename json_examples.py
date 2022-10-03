@@ -7,8 +7,6 @@ json_path2 = r'd:\G-Doc\Projects\GameDev\Zergen Studio\Biomorph-Resources\maps\f
 with open(json_path1, encoding='utf-8') as f_in:
     data = load(f_in)
 
-pprint(data)
-
 with open(json_path1, encoding='utf-8') as f_in:
     string = loads(f_in.read())
 
@@ -22,3 +20,7 @@ data['_b_mountains']['changed'] = None
 
 with open(json_path2, 'w', encoding='utf-8') as f_out:
     f_out.write(dumps(data))
+
+
+if __name__ == '__main__':
+    pprint(data)
