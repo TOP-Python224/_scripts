@@ -14,14 +14,19 @@ class Address:
                  entrance: int,
                  floor: int,
                  office: str):
+        # запись в свойство — работает сеттер
         self.zipcode = zipcode
         self.country = country
         self.region = region
         self.city = city
         self.street = street
+        # запись в свойство — работает сеттер
         self.number = building_number
+        # запись в свойство — работает сеттер
         self.liter = building_liter
+        # запись в свойство — работает сеттер
         self.entrance = entrance
+        # запись в свойство — работает сеттер
         self.floor = floor
         self.office = office
 
