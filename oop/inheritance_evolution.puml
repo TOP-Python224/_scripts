@@ -1,0 +1,39 @@
+@startuml
+
+class Proteus {
+    + {static} move()
+    + {static} eat()
+    + {static} reproduce()
+}
+
+
+class Fish {
+    + {static} breath()
+}
+Proteus <|-- Fish
+
+
+class Reptile {
+    + {static} hide()
+}
+Fish <|-- Reptile
+
+
+class Bird {
+    + {static} fly()
+}
+Reptile <|-- Bird
+
+
+class Mammals {
+    + {static} care()
+}
+Reptile <|-- Mammals
+
+
+class Human {
+    + {static} speak()
+}
+Mammals <|-- Human
+
+@enduml
