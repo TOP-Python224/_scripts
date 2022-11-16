@@ -1,8 +1,17 @@
-class NamedInt(int):
-    __names = {
-        1: 'один', 2: 'два', 3: 'три', 4: 'четыре', 5: 'пять', 6: 'шесть', 7: 'семь', 8: 'восемь', 9: 'девять', 10: 'десять', 11: 'одиннадцать', 12: 'двенадцать', 13: 'тринадцать', 14: 'четырнадцать', 15: 'пятнадцать', 16: 'шестнадцать', 17: 'семнадцать', 18: 'восемнадцать', 19: 'девятнадцать', 20: 'двадцать', 30: 'тридцать', 40: 'сорок', 50: 'пятьдесят', 60: 'шестьдесят', 70: 'семьдесят', 80: 'восемьдесят', 90: 'девяносто', 100: 'сто', 200: 'двести', 300: 'триста', 400: 'четыреста', 500: 'пятьсот', 600: 'шестьсот', 700: 'семьсот', 800: 'восемьсот', 900: 'девятьсот', 0: ''
-    }
+from json import load as jload
+from pathlib import Path
+from sys import path
 
+numbers_path = Path(path[0]) / 'numbers_en.json'
+
+
+# mixin class
+class NumberNames:
+    with open(numbers_path, encoding='utf-8') as filein:
+        _names = {int(k): v for k, v in jload(filein).items()}
+
+
+class NamedInt(int, NumberNames):
     def __new__(cls, *args, **kwargs):
         instance = super().__new__(cls, *args, **kwargs)
         cls.__post_init__(instance)
@@ -12,11 +21,11 @@ class NamedInt(int):
         o = self % 10
         t = self % 100 - o
         h = self % 1000 - t - o
-        name = self.__names[h] + ' ' if h else ''
+        name = self._names[h] + ' ' if h else ''
         if t == 10 and 1 <= o <= 9:
-            name += self.__names[t+o] + ' '
+            name += self._names[t + o] + ' '
         else:
-            name += (self.__names[t] + ' ' if t else '') + self.__names[o]
+            name += (self._names[t] + ' ' if t else '') + self._names[o]
         self.name = name.strip()
 
     def __adder(self, other: int) -> 'NamedInt':
