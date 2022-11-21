@@ -6,6 +6,23 @@ enum Gender {
     MALE
     FEMALE
 }
+enum EducationForm {
+    INTRAMURAL
+    EXTRAMURAL
+    REMOTE
+}
+enum Contract {
+    BUDGET
+    COMPANY
+    PERSONAL
+}
+enum Degree {
+    BACHELOR
+    SPECIALIST
+    MASTER
+    CANDIDATE
+    DOCTOR
+}
 
 
 class Contact {
@@ -24,6 +41,55 @@ class Contact {
 }
 
 
+class Student {
+    +form: EducationForm
+    +contract: Contract
+    +year: int
+    +speciality: str
+    +grant: Decimal
+}
+Student *-- "сильная" EducationForm
+Student *-- "сильная" Contract
+
+
+class Teacher {
+    +courses: list[str]
+    +professorship: bool
+}
+
+
+abstract class ProfessionalEmployee {
+    +degree: Degree
+}
+ProfessionalEmployee <|-- Teacher
+ProfessionalEmployee::degree o-- Degree
+
+
+class Administrator {
+    +division: str
+    +subordinates: list[Employee]
+}
+Administrator::subordinates o-- Employee
+
+
+class GeneralPersonnel
+
+
+abstract class Employee {
+    +hire_date: date
+    -prev_experience: int
+    +salary: Decimal
+    +position: str
+    +head: Administrator
+    .. properties ..
+    +experience
+    __
+}
+Employee <|-- GeneralPersonnel
+Employee <|-- ProfessionalEmployee
+Employee::head o-- Administrator
+
+
 abstract class Person {
     +surname: str
     +name: str
@@ -32,6 +98,8 @@ abstract class Person {
     +gender: Gender
     +contact: Contact
 }
+Person <|-- Student
+Person <|-- Employee
 Person *-- "сильная" Gender
 Person::contact o-- Contact
 
