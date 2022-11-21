@@ -1,0 +1,39 @@
+@startuml
+
+hide enum empty members
+
+enum Gender {
+    MALE
+    FEMALE
+}
+
+
+class Contact {
+    +mobile: str = None
+    +email: str = None
+    +office: str = None
+    +home: str = None
+    +telegram: str = None
+    +icq: str = None
+    +validate_mobile(): bool
+    +validate_email(): bool
+    +validate_office(): bool
+    +validate_home(): bool
+    +validate_validate_telegram(): bool
+    +validate_icq(): bool
+}
+
+
+abstract class Person {
+    +surname: str
+    +name: str
+    +patronymic: str
+    +birthdate: date
+    +gender: Gender
+    +contact: Contact
+}
+Person *-- "сильная" Gender
+Person::contact o-- Contact
+
+
+@enduml
