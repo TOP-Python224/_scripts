@@ -22,3 +22,14 @@ org.budget = 100000
 org.budget = 'денег-нет-шлите-телеграммы'
 
 print(org.__dict__)
+
+
+org._budget = 233500
+print(org._budget)
+print(org.__dict__)
+
+
+print(org._Organization__budget_calendar)
+org._Organization__budget_calendar = (1, 2, 3)
+print(org.__dict__)
+
