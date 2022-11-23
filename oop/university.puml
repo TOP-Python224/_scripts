@@ -39,6 +39,63 @@ class Contact {
     +validate_validate_telegram(): bool
     +validate_icq(): bool
 }
+Contact --o Person
+Contact --o OrganizationLevel
+
+
+abstract class OrganizationLevel {
+    +name: str
+    +employees: list[Employee]
+    +head: Administrator
+    +contact: Contact
+    #budget: Decimal
+}
+OrganizationLevel <|-- University
+OrganizationLevel <|-- Institute
+OrganizationLevel <|-- Dormitory
+OrganizationLevel <|-- Department
+OrganizationLevel::head o-- Administrator
+OrganizationLevel::employees o-- Employee
+
+
+class University {
+    +institutes: list[Institute]
+    +dormitories: list[Dormitory]
+}
+University::institutes o-- Institute
+University::dormitories o-- Dormitory
+
+
+class Institute {
+    +departments: list[Department]
+}
+Institute::departments o-- Department
+
+
+class Dormitory {
+    rooms: dict[str, list[Student]]
+}
+Dormitory::rooms o-- Student
+
+
+class Department {
+    +groups: list[Group]
+}
+Department::groups o-- Group
+
+
+abstract class list
+hide list empty members
+list <|-- Group
+
+
+class Group {
+    +name: str
+    +chief: Student
+    +curator: Teacher
+}
+Group o-- Student
+Group::curator o-- Teacher
 
 
 class Student {
@@ -58,10 +115,14 @@ class Teacher {
 }
 
 
+class Researcher
+
+
 abstract class ProfessionalEmployee {
     +degree: Degree
 }
 ProfessionalEmployee <|-- Teacher
+ProfessionalEmployee <|-- Researcher
 ProfessionalEmployee::degree o-- Degree
 
 
@@ -101,7 +162,6 @@ abstract class Person {
 Person <|-- Student
 Person <|-- Employee
 Person *-- "сильная" Gender
-Person::contact o-- Contact
 
 
 @enduml
