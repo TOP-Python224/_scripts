@@ -1,0 +1,22 @@
+@startuml
+
+hide empty methods
+
+class A {
+    +{static}class_attr1 = 10
+}
+
+class B {
+    +{static}class_attr1 = 'xyz'
+    +{static}class_attr2 = True
+}
+
+class C
+class D
+
+A <|-- C
+B <|-- C
+A <|-- D
+B <|-- D
+
+@enduml
