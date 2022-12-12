@@ -34,15 +34,43 @@ class HTMLTag:
     def __str__(self):
         return self.__str(0)
 
+    # в данной реализации нецелесообразно "прятать" класс HTMLBuilder
+    @staticmethod
+    def create(name: str, value: str = ''):
+        return HTMLBuilder(name, value)
 
-ul = HTMLTag('ul')
-ul.nested = HTMLTag('li', 'File')
-ul.nested = HTMLTag('li', 'Edit')
-ul.nested = HTMLTag('li', 'View')
 
-div = HTMLTag('div')
-div.nested = HTMLTag('p', 'Menu')
-div.nested = ul
+class HTMLBuilder:
+    def __init__(self, root: HTMLTag | str, value: str = ''):
+        if isinstance(root, HTMLTag):
+            self.root = root
+        elif isinstance(root, str):
+            self.root = HTMLTag(root, value)
+        else:
+            raise TypeError('use HTMLTag or str instance for root parameter')
+
+    def nested(self, name: str, value: str = ''):
+        tag = HTMLTag(name, value)
+        self.root.nested = tag
+        return HTMLBuilder(tag)
+
+    def sibling(self, name: str, value: str = ''):
+        tag = HTMLTag(name, value)
+        self.root.nested = tag
+        return self
+
+    def build(self):
+        return self.root
+
+
+root = HTMLTag.create('div')
+root.sibling('p', 'Menu')\
+    .nested('ul')\
+    .sibling('li', 'File')\
+    .sibling('li', 'Edit')\
+    .sibling('li', 'View')
+div = root.build()
+print(div)
 
 script_dir = Path(path[0])
-(script_dir/'example.html').write_text(str(div), encoding='utf-8')
+(script_dir / 'example.html').write_text(str(div), encoding='utf-8')
