@@ -1,10 +1,14 @@
-"""Шаблон Строитель"""
+"""Демонстратор строителя."""
 
 from pathlib import Path
 from sys import path
 
 
 class HTMLTag:
+    """
+    Описывает HTML тег, который может содержать вложенные теги.
+    Может быть инициализирован с помощью строителя.
+    """
     default_indent_spaces: int = 2
 
     def __init__(self, name: str, value: str = ''):
@@ -14,13 +18,16 @@ class HTMLTag:
 
     @property
     def nested(self):
+        """Возвращает неиндексируемый итератор по всем вложенным тегам."""
         return iter(self.__nested)
 
     @nested.setter
     def nested(self, value: 'HTMLTag'):
+        """Добавляет вложенный тег к текущему."""
         self.__nested += [value]
 
     def __str(self, indent_level: int) -> str:
+        """Рекурсивно формирует строку с текущим и всеми вложенными тегами."""
         margin = ' ' * indent_level * self.default_indent_spaces
         eol = ''
         result = f"{margin}<{self.name}>{self.value}"
@@ -41,6 +48,9 @@ class HTMLTag:
 
 
 class HTMLBuilder:
+    """
+    Предоставляет методы для пошаговой инициализации экземпляра HTMLTag.
+    """
     def __init__(self, root: HTMLTag | str, value: str = ''):
         if isinstance(root, HTMLTag):
             self.root = root
@@ -49,17 +59,19 @@ class HTMLBuilder:
         else:
             raise TypeError('use HTMLTag or str instance for root parameter')
 
-    def nested(self, name: str, value: str = ''):
+    def nested(self, name: str, value: str = '') -> 'HTMLBuilder':
+        """Добавляет вложенный тег к текущему тегу и возвращает строитель для вложенного тега."""
         tag = HTMLTag(name, value)
         self.root.nested = tag
         return HTMLBuilder(tag)
 
-    def sibling(self, name: str, value: str = ''):
+    def sibling(self, name: str, value: str = '') -> 'HTMLBuilder':
+        """Добавляет вложенный тег к текущему тегу и возвращает текущий строитель."""
         tag = HTMLTag(name, value)
         self.root.nested = tag
         return self
 
-    def build(self):
+    def build(self) -> HTMLTag:
         return self.root
 
 

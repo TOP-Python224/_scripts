@@ -1,4 +1,4 @@
-"""Шаблон Фабричный метод"""
+"""Демонстратор фабричного метода."""
 
 from enum import Enum
 from math import cos, sin, pi

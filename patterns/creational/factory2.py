@@ -1,4 +1,4 @@
-"""Шаблон Выбирающая фабрика"""
+"""Демонстратор выбирающей фабрики."""
 
 from abc import ABC
 from dataclasses import dataclass
