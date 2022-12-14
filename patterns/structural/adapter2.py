@@ -30,8 +30,8 @@ class Adapted:
         self.obj = obj_to_adapt
         self.__dict__ |= methods
 
-    def __getattr__(self, item):
-        return getattr(self.obj, item)
+    def __getattr__(self, attribute_name: str):
+        return getattr(self.obj, attribute_name)
 
 
 # объекты для адаптации
