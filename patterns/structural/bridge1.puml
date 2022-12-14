@@ -1,0 +1,66 @@
+@startuml
+
+skinparam {
+    ClassAttributeFontName Space Mono
+    FrameBorderThickness 2
+}
+hide abstract class empty members
+
+frame мост {
+
+    abstract class Renderer {
+        +render_square(side: <i>float</i>)
+        +render_circle(side: <i>float</i>)
+        +{method}...
+    }
+
+    abstract class Shape {
+        +renderer: Renderer
+        __init__()
+        +draw()
+        +resize(factor: <i>float</i>)
+    }
+
+}
+
+class RasterRenderer {
+    +render_square(side: <i>float</i>)
+    +render_circle(side: <i>float</i>)
+    +{method}...
+}
+
+
+class VectorRenderer {
+    +render_square(side: <i>float</i>)
+    +render_circle(side: <i>float</i>)
+    +{method}...
+}
+
+
+class Square {
+    +renderer: Renderer
+    +side: <i>float</i>
+    __init__()
+    +draw()
+    +resize(factor: <i>float</i>)
+}
+
+
+class Circle {
+    +renderer: Renderer
+    +radius: <i>float</i>
+    __init__()
+    +draw()
+    +resize(factor: <i>float</i>)
+}
+
+
+Renderer <|-- RasterRenderer
+Renderer <|--- VectorRenderer
+Shape <|--- Square
+Shape <|-- Circle
+
+Shape o-right- Renderer
+
+
+@enduml
