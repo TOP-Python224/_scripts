@@ -12,6 +12,8 @@ frame nl2 as "  слой 2  " {
     circle n2_2 as "нейрон 2"
 }
 
+    circle n3_1 as "нейрон 3"
+
 
 n2_1 --[plain]-> n1_1
 n2_1 --[plain]-> n1_2
@@ -19,7 +21,11 @@ n2_1 --[plain]-> n1_3
 
 n2_2 --[plain]-> n1_1
 n2_2 --[plain]-> n1_2
-n2_2 -[plain]-> n1_3
+n2_2 --[plain]-> n1_3
+
+n1_1 ---> n3_1
+n1_2 ---> n3_1
+n1_3 ---> n3_1
 
 
 @enduml
