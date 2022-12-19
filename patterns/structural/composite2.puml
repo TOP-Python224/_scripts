@@ -1,0 +1,19 @@
+@startuml
+
+
+component n1 as "\nнейрон 1" {
+    portin inputs1
+    portout outputs1
+}
+
+component n2 as "\nнейрон 2" {
+    portin inputs2
+    portout outputs2
+}
+
+
+outputs2 -- n1
+inputs1 -- n2
+
+
+@enduml
