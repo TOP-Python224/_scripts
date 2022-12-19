@@ -1,19 +1,25 @@
 @startuml
 
 
-component n1 as "\nнейрон 1" {
-    portin inputs1
-    portout outputs1
+frame nl1 as "  слой 1  " {
+    circle n1_1 as "нейрон 1"
+    circle n1_2 as "нейрон 2"
+    circle n1_3 as "нейрон 3"
 }
 
-component n2 as "\nнейрон 2" {
-    portin inputs2
-    portout outputs2
+frame nl2 as "  слой 2  " {
+    circle n2_1 as "нейрон 1"
+    circle n2_2 as "нейрон 2"
 }
 
 
-outputs2 -- n1
-inputs1 -- n2
+n2_1 --[plain]-> n1_1
+n2_1 --[plain]-> n1_2
+n2_1 --[plain]-> n1_3
+
+n2_2 --[plain]-> n1_1
+n2_2 --[plain]-> n1_2
+n2_2 -[plain]-> n1_3
 
 
 @enduml
