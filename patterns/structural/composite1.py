@@ -31,18 +31,12 @@ class GroupObject(VectorObject):
         self.name = name
         self.__elements: list[VectorObject] = []
 
-    @property
-    def elements(self):
-        return iter(self.__elements)
+    def add_element(self, *objects: VectorObject):
+        self.__elements += list(objects)
 
-    @elements.setter
-    def elements(self, value: VectorObject | Sequence[VectorObject]):
-        if isinstance(value, Sequence):
-            self.__elements += list(value)
-        elif isinstance(value, VectorObject):
-            self.__elements += [value]
-        else:
-            raise TypeError
+    def render(self):
+        for obj in self.__elements:
+            obj.render()
 
 
 ab = Line('AB')
@@ -51,9 +45,15 @@ cd = Line('CD')
 da = Line('DA')
 formula = Text('perimeter_formula', 'P = AB + BC + CD + DA')
 
+ab.render()
+formula.render()
+
+print()
+
+
 group = GroupObject('rectangle')
-group.elements = ab
-# выглядит как переопределение
-group.elements = bc
 
+figure = (ab, bc, formula, cd, da)
+group.add_element(*figure)
 
+group.render()
