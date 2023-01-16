@@ -1,0 +1,5 @@
+{
+  "filename_format": "%Y-%m-%d",
+  "timestamp_format": "%Y-%m-%d %H:%M:%S",
+  "content": "test string"
+}
