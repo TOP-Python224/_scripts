@@ -1,3 +1,4 @@
+-- без группировки
   select f.`name` as 'Faculty',
 		 d.`name` as 'Department'
     from `faculties` as f
@@ -5,6 +6,7 @@
       on f.`id` = d.`faculty_id`
 order by f.`name`;
 
+-- с группировкой
   select f.`name` as 'Faculty',
 		 d.`name` as 'Department'
     from `faculties` as f
@@ -13,6 +15,7 @@ order by f.`name`;
 group by `Faculty`
 order by f.`name`;
 
+-- с группировкой и агрегированием
   select f.`name` as 'Faculty',
 		 group_concat(d.`name` separator ', ') as 'Departments'
     from `faculties` as f
