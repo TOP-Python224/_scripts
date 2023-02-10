@@ -1,0 +1,17 @@
+{
+  "mysql": {
+    "dbapi": "mysqlconnector",
+    "host": "127.0.0.1",
+    "port": 3300,
+    "user": "root",
+    "password": "root"
+  },
+  "postgresql": {
+    "dbapi": "psycopg",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "user": "postgres",
+    "password": "root",
+    "database": "airflights"
+  }
+}
