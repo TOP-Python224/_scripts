@@ -89,4 +89,11 @@ class Command(BaseCommand):
 # >>> ast.books.all()
 # <QuerySet [<Book: Осенние визиты>, <Book: Вино из одуванчиков>, <Book: Электрическое тело, пою>]>
 # >>>
-
+# >>> luc = Author.objects.get(pk=2)
+# >>>
+# >>> luc.book_set
+# <django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x0000027E838C3E20>
+# >>>
+# >>> luc.book_set.all()
+# <QuerySet [<Book: Спектр>, <Book: Осенние визиты>]>
+# >>>
