@@ -70,6 +70,44 @@ TEMPLATES = [
     },
 ]
 
+# library
+# ├───catalog
+# │   └───templates
+# │       └───catalog
+# │           ├───index.html
+# │           └───...
+# ├───gallery
+# │   └───templates
+# │       └───gallery
+# │           ├───index.html
+# │           └───...
+# ├───forum
+# │   └───templates
+# │       └───forum
+# │           ├───main.html
+# │           └───...
+# ├───admin
+# │   └───templates
+# │       └───admin
+# │           ├───main.html
+# │           └───...
+# └───core
+
+# templates
+# ├───catalog
+# │   ├───index.html
+# │   └───...
+# ├───gallery
+# │   ├───index.html
+# │   └───...
+# ├───forum
+# │   ├───main.html
+# │   └───...
+# └───admin
+#     ├───main.html
+#     └───...
+
+
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
