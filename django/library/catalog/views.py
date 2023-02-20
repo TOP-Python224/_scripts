@@ -13,3 +13,15 @@ def index(request):
         }
     )
 
+
+def publisher(request, pub_id: int):
+    publisher = Publisher.objects.get(pk=pub_id)
+    return render(
+        request,
+        'catalog/publisher.html',
+        {
+            'page_title': publisher.name,
+            'publisher': publisher,
+        }
+    )
+
