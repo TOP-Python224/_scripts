@@ -25,3 +25,10 @@ def publisher(request, pub_id: int):
         }
     )
 
+
+def contacts(request):
+    return render(
+        request,
+        'catalog/contacts.html',
+    )
+
