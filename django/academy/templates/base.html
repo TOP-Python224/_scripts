@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ page_title|default:"ITMO" }}</title>
+
+    <style type="text/css">
+      body {
+        background: #2d2a2e;
+        color: #fcfcfa;
+      }
+
+      {% block extra_styles %}
+      {% endblock extra_styles %}
+    </style>
+
+  </head>
+  <body>
+
+<!-- base_header -->
+    {% block base_header %}
+      <div align="left">
+        {% include "menu/top.html" %}
+      </div>
+    {% endblock base_header %}
+<!-- /base_header -->
+
+<!-- base_content -->
+    {% block base_content %}
+    {% endblock base_content %}
+<!-- /base_content -->
+
+<!-- base_footer -->
+    {% block base_footer %}
+      <div>
+        <hr size="2">
+      </div>
+      <div align="right">
+        <p><em>Created by Gennadiy S. for Python224</em></p>
+        <p><em>For educational use only</em></p>
+      </div>
+    {% endblock base_footer %}
+<!-- /base_footer -->
+
+  </body>
+</html>
