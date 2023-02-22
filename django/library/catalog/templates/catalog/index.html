@@ -1,40 +1,32 @@
-<!DOCTYPE html>
-<html lang="ru-ru">
-  <head>
-    <meta charset="UTF-8">
-    <title>{{ page_title|default:"Библиотека" }}</title>
-    <style type="text/css">
-      body {
-        background: #2d2a2e;
-        color: #fcfcfa;
-      }
-    </style>
-  </head>
-  <body>
-    <div align="center">
-      <h1>Добро пожаловать в библиотеку!</h1>
-    </div>
-    <br>
-    <div align="center">
-      <h3>Авторы</h3>
-    </div>
-    <table cellpadding="5">
-      {% for author in authors_list %}
-        <tr>
-          <td>{{ author }}</td>
-        </tr>
-      {% endfor %}
-    </table>
-    <br>
-    <div align="center">
-      <h3>Издатели</h3>
-    </div>
-    <table cellpadding="5">
-      {% for publisher in publishers_list %}
-        <tr>
-          <td><a href="{% url publisher.translit_lc %}">{{ publisher }}</a></td>
-        </tr>
-      {% endfor %}
-    </table>
-  </body>
-</html>
+{% extends base_template|default:"catalog/base.html" %}
+
+
+{% block content %}
+
+  <div align="center">
+    <h1>Добро пожаловать в библиотеку!</h1>
+  </div>
+  <br>
+  <div align="center">
+    <h3>Авторы</h3>
+  </div>
+  <table cellpadding="5">
+    {% for author in authors_list %}
+      <tr>
+        <td>{{ author }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <br>
+  <div align="center">
+    <h3>Издатели</h3>
+  </div>
+  <table cellpadding="5">
+    {% for publisher in publishers_list %}
+      <tr>
+        <td><a href="{% url publisher.translit_lc %}">{{ publisher }}</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+
+{% endblock content %}
