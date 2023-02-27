@@ -4,8 +4,10 @@
       <a href="{% url 'main' %}">Main</a>
     </td>
     <td width="30"></td>
-    <td>
-      <a href="">Departments</a>
-    </td>
+    {% for item in top_menu|default:"" %}
+      <td>
+        <a href="{{ item.url }}">{{ item.name }}</a>
+      </td>
+    {% endfor %}
   </tr>
 </table>
