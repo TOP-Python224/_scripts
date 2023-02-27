@@ -3,6 +3,18 @@
 
 {% block base_content %}
 
-
+  <div align="center">
+    <h1>ITMO University Structure</h1>
+  </div>
+  <br>
+  <div>
+    <table cellpadding="5">
+      {% for object in object_list %}
+        <tr>
+          <td>{{ object }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
 
 {% endblock base_content %}
