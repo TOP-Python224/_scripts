@@ -15,6 +15,14 @@ class Faculty(models.Model):
     class Meta:
         db_table = 'faculties'
 
+    @property
+    def acronym(self):
+        return ''.join(
+            word[0]
+            for word in str(self.name).lower().split()
+            if len(word) > 3
+        )
+
     def __str__(self):
         return f'{self.name}'
 

@@ -8,10 +8,12 @@
   </div>
   <br>
   <div>
-    <table cellpadding="5">
+    <table cellpadding="6">
       {% for object in object_list %}
         <tr>
-          <td>{{ object }}</td>
+          <td>
+            <a href="{% url object.acronym %}">{{ object }}</a>
+          </td>
         </tr>
       {% endfor %}
     </table>

@@ -1,0 +1,34 @@
+{% extends base_template|default:"base.html" %}
+
+
+{% block base_content %}
+
+  <div align="center">
+    <h2>{{ object }}</h2>
+  </div>
+  <br>
+  <div>
+    {% if object.department_set.all %}
+      <div>
+        <h4>Departments: </h4>
+      </div>
+    {% endif %}
+    <div>
+      <table cellpadding="4">
+        {% for department in object.department_set.all %}
+          <tr>
+            <td>{{ department }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <br>
+    <div>
+      <h4>Financing: </h4>
+    </div>
+    <div>
+      <p>{{ object.financing|floatformat:"2g" }} ₽</p>
+    </div>
+  </div>
+
+{% endblock base_content %}
