@@ -1,5 +1,8 @@
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import ListView, DetailView
 
+from structure.forms import MyForm
 from structure.models import Faculty
 
 
@@ -34,4 +37,24 @@ class FacultyView(DetailView):
             'page_title': self.object.acronym.upper(),
             # 'top_menu': faculty_menu[self.object.acronym],
         } | super().get_context_data(**kwargs)
+
+
+def my_form_view(request):
+    if request.method == 'GET':
+        form = MyForm()
+
+    elif request.method == 'POST':
+        form = MyForm(request.POST)
+        print(f'{form.data = }')
+        if form.is_valid():
+            print(f'{form.cleaned_data = }')
+            return redirect(reverse('main'))
+
+    return render(
+        request,
+        'structure/forms_test.html',
+        {
+            'form': form,
+        }
+    )
 

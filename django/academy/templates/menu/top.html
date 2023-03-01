@@ -4,6 +4,9 @@
       <a href="{% url 'main' %}">Main</a>
     </td>
     <td width="30"></td>
+    <td>
+      <a href="{% url 'forms' %}">Forms</a>
+    </td>
     {% for item in top_menu|default:"" %}
       <td>
         <a href="{{ item.url }}">{{ item.name }}</a>
