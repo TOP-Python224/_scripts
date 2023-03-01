@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
 
 from structure.forms import MyForm
 from structure.models import Faculty
@@ -39,22 +39,12 @@ class FacultyView(DetailView):
         } | super().get_context_data(**kwargs)
 
 
-def my_form_view(request):
-    if request.method == 'GET':
-        form = MyForm()
+class MyFormView(FormView):
+    form_class = MyForm
+    template_name = 'structure/forms_test.html'
+    success_url = '/'
 
-    elif request.method == 'POST':
-        form = MyForm(request.POST)
-        print(f'{form.data = }')
-        if form.is_valid():
-            print(f'{form.cleaned_data = }')
-            return redirect(reverse('main'))
-
-    return render(
-        request,
-        'structure/forms_test.html',
-        {
-            'form': form,
-        }
-    )
+    def form_valid(self, form):
+        print(f'{form.cleaned_data}')
+        return super().form_valid(form)
 

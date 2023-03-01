@@ -1,7 +1,7 @@
 from django.urls import path
 
 from structure.models import Faculty
-from structure.views import IndexView, FacultyView, my_form_view
+from structure.views import IndexView, FacultyView, MyFormView
 
 
 urlpatterns = [
@@ -15,6 +15,6 @@ urlpatterns = [
     )
     for faculty in Faculty.objects.all()
 ] + [
-    path('forms', my_form_view, name='forms')
+    path('forms', MyFormView.as_view(), name='forms')
 ]
 
