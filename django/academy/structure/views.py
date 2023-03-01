@@ -1,8 +1,5 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView
 
-from structure.forms import MyForm
 from structure.models import Faculty
 
 
@@ -37,14 +34,4 @@ class FacultyView(DetailView):
             'page_title': self.object.acronym.upper(),
             # 'top_menu': faculty_menu[self.object.acronym],
         } | super().get_context_data(**kwargs)
-
-
-class MyFormView(FormView):
-    form_class = MyForm
-    template_name = 'structure/forms_test.html'
-    success_url = '/'
-
-    def form_valid(self, form):
-        print(f'{form.cleaned_data}')
-        return super().form_valid(form)
 

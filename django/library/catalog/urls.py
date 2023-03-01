@@ -9,4 +9,5 @@ urlpatterns = [
     path('contacts', views.contacts),
     path('ast/', views.publisher, kwargs={'pub_id': 1}, name='ast'),
     path('eksmo/', views.publisher, kwargs={'pub_id': 2}, name='eksmo'),
+    path('form/', views.my_form_view, name='form'),
 ]
