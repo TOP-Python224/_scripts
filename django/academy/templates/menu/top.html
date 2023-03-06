@@ -9,5 +9,9 @@
         <a href="{{ item.url }}">{{ item.name }}</a>
       </td>
     {% endfor %}
+    <td width="600"></td>
+    <td>
+      <a href="{% url 'register' %}">Register</a>
+    </td>
   </tr>
 </table>
