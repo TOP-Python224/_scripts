@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, FormView
@@ -67,4 +68,28 @@ class FacultyAddDepartment(SingleObjectMixin, FormView):
 
     def get_success_url(self):
         return reverse(self.object.acronym, kwargs={'pk': self.object.pk})
+
+
+# простая альтернатива для простой логики обработки HTTP запроса
+# def faculty_view(request, pk: int):
+#     model = Faculty.objects.get(pk=pk)
+#
+#     if request.model == 'GET':
+#         form = AddDepartment()
+#
+#     elif request.model == 'POST':
+#         form = AddDepartment(request.POST)
+#         if form.is_valid():
+#             form.save_with_fk(model)
+#             url = reverse(model.acronym, kwargs={'pk': model.pk})
+#             return redirect(url)
+#
+#     return render(
+#         request, 'structure/faculty.html',
+#         {
+#             'page_title': model.acronym.upper(),
+#             'object': model,
+#             'form': form,
+#         }
+#     )
 
