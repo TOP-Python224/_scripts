@@ -1,3 +1,4 @@
+from decimal import Decimal as dec
 from django import forms
 
 from structure.models import Department
@@ -24,4 +25,12 @@ class AddDepartment(forms.ModelForm):
         self.fields['name'].widget.attrs |= {'class': 'input_text_style'}
         self.fields['building'].widget.attrs |= {'class': 'input_int_style'}
         self.fields['financing'].widget.attrs |= {'class': 'input_dec_style'}
+
+    def save_with_fk(self, faculty):
+        department = super().save(commit=False)
+        department.faculty = faculty
+        if self.cleaned_data['select_currency'] == 'EUR':
+            department.financing *= dec('0.85')
+        department.save()
+        return department
 
