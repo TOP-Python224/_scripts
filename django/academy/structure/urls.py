@@ -1,7 +1,7 @@
 from django.urls import path
 
-from structure.models import Faculty
-from structure.views import IndexView, FacultyView
+from structure.models import Faculty, Department
+from structure.views import IndexView, FacultyView, DepartmentView
 
 
 urlpatterns = [
@@ -14,5 +14,13 @@ urlpatterns = [
         name=f'{faculty.acronym}'
     )
     for faculty in Faculty.objects.all()
+] + [
+    path(
+        f'{dep.acronym}/',
+        DepartmentView.as_view(),
+        kwargs={'pk': dep.id},
+        name=f'{dep.acronym}'
+    )
+    for dep in Department.objects.all()
 ] + []
 

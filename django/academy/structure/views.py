@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -5,7 +6,7 @@ from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.detail import SingleObjectMixin
 
 from structure.forms import AddDepartment
-from structure.models import Faculty
+from structure.models import Faculty, Department
 
 
 # faculty_menu = {
@@ -92,4 +93,10 @@ class FacultyAddDepartment(SingleObjectMixin, FormView):
 #             'form': form,
 #         }
 #     )
+
+
+class DepartmentView(DetailView):
+    model = Department
+    template_name = 'structure/department.html'
+
 

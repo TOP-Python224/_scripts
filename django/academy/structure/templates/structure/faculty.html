@@ -17,7 +17,9 @@
       <table cellpadding="4">
         {% for department in object.department_set.all %}
           <tr>
-            <td>{{ department }}</td>
+            <td>
+              <a href="{% url department.acronym %}">{{ department }}</a>
+            </td>
           </tr>
         {% endfor %}
       </table>

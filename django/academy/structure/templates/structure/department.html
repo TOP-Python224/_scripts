@@ -1,0 +1,29 @@
+{% extends base_template|default:"base.html" %}
+
+
+{% block base_content %}
+
+  <div>
+    <div>
+      <h3>{{ object }}</h3>
+    </div>
+    <div>
+      <h5>Building: {{ object.building }}</h5>
+    </div>
+    <div>
+      <h5>Financing: {{ object.financing|floatformat:"2g" }} ₽</h5>
+    </div>
+    <div>
+      {% if object.group_set.all %}
+        <table cellpadding="3">
+          {% for group in object.group_set.all %}
+            <tr>
+              <td>{{ group }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock base_content %}
