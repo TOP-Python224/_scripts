@@ -31,20 +31,22 @@
     <div>
       <p>{{ object.financing|floatformat:"2g" }} ₽</p>
     </div>
-    <div>
+    {% if user.is_authenticated %}
       <div>
-        <h4>Add Department</h4>
+        <div>
+          <h4>Add Department</h4>
+        </div>
+        <div>
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <div>
+              <input type="submit" value="Add">
+            </div>
+          </form>
+        </div>
       </div>
-      <div>
-        <form action="" method="post">
-          {% csrf_token %}
-          {{ form.as_div }}
-          <div>
-            <input type="submit" value="Add">
-          </div>
-        </form>
-      </div>
-    </div>
+    {% endif %}
   </div>
 
 {% endblock base_content %}

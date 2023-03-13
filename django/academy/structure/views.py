@@ -95,7 +95,7 @@ class FacultyAddDepartment(SingleObjectMixin, FormView):
 #     )
 
 
-class DepartmentView(DetailView):
+class DepartmentView(LoginRequiredMixin, DetailView):
     model = Department
     template_name = 'structure/department.html'
 
