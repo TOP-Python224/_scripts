@@ -1,28 +1,30 @@
-<table cellpadding="20">
-  <tr>
-    <td>
-      <a href="{% url 'main' %}">Main</a>
-    </td>
-    <td width="30"></td>
-    {% for item in top_menu|default:"" %}
+<div class="top_menu">
+  <table cellpadding="20">
+    <tr>
       <td>
-        <a href="{{ item.url }}">{{ item.name }}</a>
+        <a href="{% url 'main' %}">Main</a>
       </td>
-    {% endfor %}
-    <td width="600"></td>
-    <td>
-      {% if user.is_authenticated %}
-        {{ user }}
-      {% else %}
-        <a href="{% url 'login' %}">Login</a>
-      {% endif %}
-    </td>
-    <td>
-      {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Logout</a>
-      {% else %}
-        <a href="{% url 'register' %}">Register</a>
-      {% endif %}
-    </td>
-  </tr>
-</table>
+      <td width="30"></td>
+      {% for item in top_menu|default:"" %}
+        <td>
+          <a href="{{ item.url }}">{{ item.name }}</a>
+        </td>
+      {% endfor %}
+      <td width="600"></td>
+      <td>
+        {% if user.is_authenticated %}
+          {{ user }}
+        {% else %}
+          <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </td>
+      <td>
+        {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+</div>

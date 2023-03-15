@@ -1,5 +1,12 @@
 {% extends base_template|default:"base.html" %}
 
+{% load static %}
+
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{% static 'css/accounts_fonts.css' %}">
+{% endblock head_extra %}
+
 
 {% block base_header %}
 {% endblock base_header %}

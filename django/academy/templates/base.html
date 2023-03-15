@@ -4,21 +4,15 @@
     <meta charset="UTF-8">
     <title>{{ page_title|default:"ITMO" }}</title>
 
-    <style type="text/css">
-      body {
-        background: #2d2a2e;
-        color: #fcfcfa;
-      }
-      a:active {
-        color: #f7ad24;
-      }
-      a {
-        color: #bba171;
-      }
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    {% for style in extra_styles|default:"" %}
+      <link rel="stylesheet" href="{% static style %}">
+    {% endfor %}
 
-      {% block extra_styles %}
-      {% endblock extra_styles %}
-    </style>
+    {% block head_extra %}
+    {% endblock head_extra %}
 
   </head>
   <body>
