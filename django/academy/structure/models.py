@@ -128,6 +128,7 @@ class Group(models.Model):
 
     class Meta:
         db_table = 'groups'
+        ordering = ['year', 'name']
 
     def __str__(self):
         return f'({self.year}) {self.name}'

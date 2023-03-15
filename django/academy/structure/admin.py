@@ -18,19 +18,18 @@ class DepartmentForm(forms.ModelForm):
         model = models.Department
         fields = ('name', 'building', 'financing', 'faculty', 'groups')
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['groups'].initial =
-
 
 @admin.register(models.Department)
 class DepartmentAdmin(admin.ModelAdmin):
     form = DepartmentForm
 
-    def get_changeform_initial_data(self, request):
-        initials = super().get_changeform_initial_data(request)
-        initials['groups'] = [o for o in models.Group.objects.filter(department__name=initials['name'])]
-        return initials
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form = super().get_form(request, obj, change, **kwargs)
+        values = models.Group.objects.filter(department=obj)
+        # form.base_fields['groups'].initial = values
+        # только для чтения
+        form.base_fields['groups'].queryset = values
+        return form
 
 
 admin.site.register(models.Faculty)
