@@ -22,9 +22,10 @@ class AddDepartment(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs |= {'class': 'input_text_style'}
-        self.fields['building'].widget.attrs |= {'class': 'input_int_style'}
-        self.fields['financing'].widget.attrs |= {'class': 'input_dec_style'}
+        self.fields['name'].widget.attrs |= {'class': 'form-control'}
+        self.fields['building'].widget.attrs |= {'class': 'form-control'}
+        self.fields['financing'].widget.attrs |= {'class': 'form-control'}
+        self.fields['select_currency'].widget.attrs |= {'class': 'btn btn-outline-secondary dropdown-toggle'}
 
     def save_with_fk(self, faculty):
         department = super().save(commit=False)

@@ -1,52 +1,125 @@
 {% extends base_template|default:"base.html" %}
 
+<!--suppress XmlInvalidId -->
 {% load user_tags %}
 
 
 {% block base_content %}
 
-  <div align="center">
-    <h2>{{ object }}</h2>
-  </div>
-  <br>
-  <div>
+  <div class="accordion monokai_pro"
+       id="accordionExample">
     {% if object.department_set.all %}
-      <div>
-        <h4>Departments: </h4>
+      <div class="accordion-item">
+        <h2 class="accordion-header"
+            id="headingOne">
+          <button class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne">
+            Departments:
+          </button>
+        </h2>
+        <div id="collapseOne"
+             class="accordion-collapse collapse show"
+             aria-labelledby="headingOne"
+             data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <table cellpadding="4">
+              {% for department in object.department_set.all %}
+                <tr>
+                  <td>
+                    <a href="{% url department.acronym %}">{{ department }}</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
       </div>
     {% endif %}
-    <div>
-      <table cellpadding="4">
-        {% for department in object.department_set.all %}
-          <tr>
-            <td>
-              <a href="{% url department.acronym %}">{{ department }}</a>
-            </td>
-          </tr>
-        {% endfor %}
-      </table>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header"
+          id="headingTwo">
+        <button class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo">
+          Financing:
+        </button>
+      </h2>
+      <div id="collapseTwo"
+           class="accordion-collapse collapse"
+           aria-labelledby="headingTwo"
+           data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          {{ object.financing|floatformat:"2g" }} ₽
+        </div>
+      </div>
     </div>
-    <br>
-    <div>
-      <h4>Financing: </h4>
-    </div>
-    <div>
-      <p>{{ object.financing|floatformat:"2g" }} ₽</p>
-    </div>
+
     {% has_perm 'structure.add_department' as add_form_perm %}
     {% if add_form_perm %}
-      <div>
-        <div>
-          <h4>Add Department</h4>
-        </div>
-        <div>
-          <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_div }}
-            <div>
-              <input type="submit" value="Add">
-            </div>
-          </form>
+      <div class="accordion-item">
+        <h2 class="accordion-header"
+            id="headingThree">
+          <button class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree">
+            Add Department
+          </button>
+        </h2>
+        <div id="collapseThree"
+             class="accordion-collapse collapse"
+             aria-labelledby="headingThree"
+             data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <form action="" method="post">
+              {% csrf_token %}
+
+              <div class="mb-3">
+                <label for="{{ form.name.id_for_label }}"
+                       class="form-label">
+                  {{ form.name.label }}
+                </label>
+                {{ form.name }}
+              </div>
+
+              <div class="mb-3">
+                <label for="{{ form.building.id_for_label }}"
+                       class="form-label">
+                  {{ form.building.label }}
+                </label>
+                {{ form.building }}
+              </div>
+
+              <div class="mb-3">
+                <label for="{{ form.financing.id_for_label }}"
+                       class="form-label">
+                  {{ form.financing.label }}
+                </label>
+                <div class="input-group mb-3">
+                  <input type="text"
+                         name="{{ form.financing.name }}"
+                         id="{{ form.financing.id }}"
+                         class="form-control"
+                         value="{{ form.financing.value }}"
+                         step="{{ form.financing.step }}">
+                  {{ form.select_currency }}
+                </div>
+              </div>
+              <div class="mb-3">
+                <input type="submit" value="Add" class="btn btn-primary">
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     {% endif %}

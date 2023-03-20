@@ -3,10 +3,19 @@ body {
     color: #fcfcfa;
 }
 
-a:active {
+a {
+    color: #bba171;
+}
+
+a:link {
     color: #f7ad24;
 }
 
-a {
-    color: #bba171;
+a:active {
+    color: #ffffff;
+}
+
+.monokai_pro {
+    background: #2d2a2e;
+    color: #fcfcfa;
 }
