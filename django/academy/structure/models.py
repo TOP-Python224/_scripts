@@ -4,6 +4,9 @@ from structure import fields
 
 
 class AcronymMixin:
+    """
+    Класс-примесь для моделей с атрибутом name.
+    """
     @property
     def acronym(self):
         return ''.join(
@@ -11,6 +14,14 @@ class AcronymMixin:
             for word in str(self.name).lower().split()
             if len(word) > 3
         )
+
+    def get_breadcrumb(self):
+        previous = []
+        for field in self._meta.get_fields():
+            if field.__class__ is models.ForeignKey:
+                parent = getattr(self, field.name)
+                previous = parent.get_foreign() + [{'name': parent.name, 'url': parent.acronym}]
+        return previous
 
 
 class Faculty(models.Model, AcronymMixin):
@@ -117,7 +128,7 @@ class Student(models.Model):
         return f'{self.name} {self.surname}'
 
 
-class Group(models.Model):
+class Group(models.Model, AcronymMixin):
     id = fields.PositiveMediumAutoField(primary_key=True)
     name = models.CharField(max_length=10, unique=True)
     year = models.IntegerField()
