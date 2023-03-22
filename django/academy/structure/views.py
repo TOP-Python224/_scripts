@@ -30,6 +30,11 @@ class IndexView(ListView):
     model = Faculty
     template_name = 'structure/index.html'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        return {
+            'base_template': 'bs_base.html'
+        } | super().get_context_data(object_list=object_list, **kwargs)
+
 
 class FacultyView(View):
 

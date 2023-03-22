@@ -1,0 +1,54 @@
+{% extends 'bootstrap5/bootstrap5.html' %}
+
+
+{% block bootstrap5_title %}
+  {{ page_title|default:"ITMO" }}
+{% endblock bootstrap5_title %}
+
+
+{% block bootstrap5_extra_head %}
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+  {% for style in extra_styles|default:"" %}
+    <link rel="stylesheet" href="{% static style %}">
+  {% endfor %}
+
+  {% block head_extra %}
+  {% endblock head_extra %}
+
+{% endblock bootstrap5_extra_head %}
+
+
+{% block bootstrap5_before_content %}
+<!-- base_header -->
+  {% block base_header %}
+    <div align="left">
+      {% include "menu/top.html" %}
+    </div>
+  {% endblock base_header %}
+<!-- /base_header -->
+{% endblock bootstrap5_before_content %}
+
+{% block bootstrap5_content %}
+<!-- base_content -->
+  {% block base_content %}
+  {% endblock base_content %}
+<!-- /base_content -->
+{% endblock bootstrap5_content %}
+
+
+{% block bootstrap5_after_content %}
+<!-- base_footer -->
+    {% block base_footer %}
+      <div>
+        <hr size="2">
+      </div>
+      <div align="right">
+        <p><em>Created by Gennadiy S. for Python224</em></p>
+        <p><em>For educational use only</em></p>
+      </div>
+    {% endblock base_footer %}
+<!-- /base_footer -->
+{% endblock bootstrap5_after_content %}
