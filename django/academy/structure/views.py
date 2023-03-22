@@ -5,7 +5,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.detail import SingleObjectMixin
 
-from structure.forms import AddDepartment
+from structure.forms import AddDepartment, AddGroup
 from structure.models import Faculty, Department
 
 
@@ -32,7 +32,7 @@ class IndexView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         return {
-            'base_template': 'bs_base.html'
+            'base_template': 'bs_base.html',
         } | super().get_context_data(object_list=object_list, **kwargs)
 
 
@@ -53,6 +53,7 @@ class FacultyDetails(DetailView):
 
     def get_context_data(self, **kwargs):
         return {
+            'base_template': 'bs_base.html',
             'page_title': self.object.acronym.upper(),
             'form': AddDepartment(),
             # 'top_menu': faculty_menu[self.object.acronym],
@@ -100,8 +101,43 @@ class FacultyAddDepartment(SingleObjectMixin, FormView):
 #     )
 
 
-class DepartmentView(LoginRequiredMixin, DetailView):
+class DepartmentView(View):
+
+    def get(self, request, *args, **kwargs):
+        view = DepartmentDetails.as_view()
+        return view(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        view = DepartmentAddGroup.as_view()
+        return view(request, *args, **kwargs)
+
+
+class DepartmentDetails(LoginRequiredMixin, DetailView):
     model = Department
     template_name = 'structure/department.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        return {
+            'base_template': 'bs_base.html',
+            'page_title': self.object.acronym.upper(),
+            'form': AddGroup(),
+        } | super().get_context_data(object_list=object_list, **kwargs)
+
+
+class DepartmentAddGroup(SingleObjectMixin, FormView):
+    model = Department
+    form_class = AddGroup
+    template_name = 'structure/department.html'
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.save_with_fk(self.object)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse(self.object.acronym, kwargs={'pk': self.object.pk})
 
 

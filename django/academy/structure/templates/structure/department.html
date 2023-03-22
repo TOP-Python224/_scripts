@@ -1,19 +1,26 @@
 {% extends base_template|default:"base.html" %}
 
+{% load bootstrap5 %}
+{% load user_tags %}
+
 
 {% block base_content %}
 
-  <div>
-    <div>
-      <h3>{{ object }}</h3>
+  <div class="container">
+    <div class="row">
+      <h3 class="display-3">{{ object }}</h3>
     </div>
-    <div>
+    <br>
+    <div class="row">
       <h5>Building: {{ object.building }}</h5>
     </div>
-    <div>
+    <br>
+    <div class="row">
       <h5>Financing: {{ object.financing|floatformat:"2g" }} ₽</h5>
     </div>
-    <div>
+    <br>
+    <div class="row">
+      <h6 class="display-6">Groups</h6>
       {% if object.group_set.all %}
         <table cellpadding="3">
           {% for group in object.group_set.all %}
@@ -24,6 +31,20 @@
         </table>
       {% endif %}
     </div>
+    {% has_perm 'structure.add_group' as add_form_perm %}
+    {% if add_form_perm %}
+      <br>
+      <div class="row">
+        <h6 class="display-6">Add group</h6>
+        <form action="" method="post">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <div class="mb-3">
+            {% bootstrap_button 'Add' button_type='submit' button_class='btn-warning' size='lg' %}
+          </div>
+        </form>
+      </div>
+    {% endif %}
   </div>
 
 {% endblock base_content %}

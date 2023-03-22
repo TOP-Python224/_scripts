@@ -1,6 +1,7 @@
 {% extends base_template|default:"base.html" %}
 
 <!--suppress XmlInvalidId -->
+{% load bootstrap5 %}
 {% load user_tags %}
 
 
@@ -9,10 +10,10 @@
   <div class="accordion monokai_pro"
        id="accordionExample">
     {% if object.department_set.all %}
-      <div class="accordion-item">
-        <h2 class="accordion-header"
+      <div class="accordion-item monokai_pro">
+        <h2 class="accordion-header monokai_pro"
             id="headingOne">
-          <button class="accordion-button"
+          <button class="accordion-button monokai_pro"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseOne"
@@ -22,10 +23,10 @@
           </button>
         </h2>
         <div id="collapseOne"
-             class="accordion-collapse collapse show"
+             class="accordion-collapse collapse show monokai_pro"
              aria-labelledby="headingOne"
              data-bs-parent="#accordionExample">
-          <div class="accordion-body">
+          <div class="accordion-body monokai_pro">
             <table cellpadding="4">
               {% for department in object.department_set.all %}
                 <tr>
@@ -40,10 +41,10 @@
       </div>
     {% endif %}
 
-    <div class="accordion-item">
-      <h2 class="accordion-header"
+    <div class="accordion-item monokai_pro">
+      <h2 class="accordion-header monokai_pro"
           id="headingTwo">
-        <button class="accordion-button collapsed"
+        <button class="accordion-button collapsed monokai_pro"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo"
@@ -53,10 +54,10 @@
         </button>
       </h2>
       <div id="collapseTwo"
-           class="accordion-collapse collapse"
+           class="accordion-collapse collapse monokai_pro"
            aria-labelledby="headingTwo"
            data-bs-parent="#accordionExample">
-        <div class="accordion-body">
+        <div class="accordion-body monokai_pro">
           {{ object.financing|floatformat:"2g" }} ₽
         </div>
       </div>
@@ -64,10 +65,10 @@
 
     {% has_perm 'structure.add_department' as add_form_perm %}
     {% if add_form_perm %}
-      <div class="accordion-item">
-        <h2 class="accordion-header"
+      <div class="accordion-item monokai_pro">
+        <h2 class="accordion-header monokai_pro"
             id="headingThree">
-          <button class="accordion-button collapsed"
+          <button class="accordion-button collapsed monokai_pro"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseThree"
@@ -77,28 +78,15 @@
           </button>
         </h2>
         <div id="collapseThree"
-             class="accordion-collapse collapse"
+             class="accordion-collapse collapse monokai_pro"
              aria-labelledby="headingThree"
              data-bs-parent="#accordionExample">
-          <div class="accordion-body">
+          <div class="accordion-body monokai_pro">
             <form action="" method="post">
               {% csrf_token %}
 
-              <div class="mb-3">
-                <label for="{{ form.name.id_for_label }}"
-                       class="form-label">
-                  {{ form.name.label }}
-                </label>
-                {{ form.name }}
-              </div>
-
-              <div class="mb-3">
-                <label for="{{ form.building.id_for_label }}"
-                       class="form-label">
-                  {{ form.building.label }}
-                </label>
-                {{ form.building }}
-              </div>
+              {% bootstrap_field form.name %}
+              {% bootstrap_field form.building %}
 
               <div class="mb-3">
                 <label for="{{ form.financing.id_for_label }}"

@@ -1,7 +1,7 @@
 from decimal import Decimal as dec
 from django import forms
 
-from structure.models import Department
+from structure.models import Department, Group
 
 
 class AddDepartment(forms.ModelForm):
@@ -34,4 +34,25 @@ class AddDepartment(forms.ModelForm):
             department.financing *= dec('0.85')
         department.save()
         return department
+
+
+class AddGroup(forms.ModelForm):
+    year = forms.IntegerField(
+        min_value=1,
+        max_value=6,
+        label='Enter the current year of education for a new group'
+    )
+
+    class Meta:
+        model = Group
+        fields = ('year', 'name')
+        labels = {
+            'name': 'Enter the name for a new group',
+        }
+
+    def save_with_fk(self, department):
+        group = super().save(commit=False)
+        group.department = department
+        group.save()
+        return group
 
